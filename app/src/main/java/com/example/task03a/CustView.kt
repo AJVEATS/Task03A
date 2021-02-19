@@ -30,7 +30,7 @@ class CustView : View {
 
     private var dotPaint: Paint
     private var xSep: Float = 132.5f
-    private var ySep: Float = 132.5f
+    private var ySep: Float = 140f
 
 
 
