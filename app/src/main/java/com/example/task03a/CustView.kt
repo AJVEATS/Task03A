@@ -12,8 +12,7 @@ import android.view.View
 class CustView : View {
     constructor(context: Context?) : super(context)
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
-            super(context, attrs, defStyleAttr)
+    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     //circle and text colors
     private val circleCol: Int = Color.RED
@@ -29,8 +28,12 @@ class CustView : View {
     private var wordsPaint: Paint
 
     private var dotPaint: Paint
-    private var xSep: Float = 132.5f
-    private var ySep: Float = 140f
+
+    private var xSep: Float = 150f
+    private var ySep: Float = 150f
+
+    private var numCols: Int = 5
+    private var numRows: Int = 10
 
 
 
@@ -39,6 +42,7 @@ class CustView : View {
         circlePaint = Paint().apply {
             setStyle(Style.FILL)
             setAntiAlias(true)
+
             //set the paint color using the circle color specified
             setColor(circleCol)
         }
@@ -69,6 +73,14 @@ class CustView : View {
         // Measure the size of the canvas, we could take into account padding here
         val canvasWidth = width.toFloat()
         val canvasHeight = height.toFloat()
+
+        xSep = canvasWidth / numCols
+        ySep = canvasHeight / numRows
+
+        // Calculate adjustment to centre dots
+        val xAdjust = xSep/2
+        val yAdjust = ySep/2
+
         // Draw rectangle with drawRect(topleftX, topLeftY, bottomRightX, bottomRightY, Paint)
         // Use Ctrl-P to see the parameters for a function
         canvas.drawRect(0f, 0f, canvasWidth, canvasHeight, backPaint)
@@ -83,9 +95,9 @@ class CustView : View {
 
         canvas.drawCircle(viewWidthHalf, viewHeightHalf, radius, circlePaint) */
 
-        for (x in 1..5) {
-            for (y in 1..10) {
-                canvas.drawPoint(x*xSep, y*ySep, dotPaint)
+        for (x in 1..numCols) {
+            for (y in 1..numRows) {
+                canvas.drawPoint((x*xSep)-xAdjust, (y*ySep)-yAdjust, dotPaint)
             }
         }
 
